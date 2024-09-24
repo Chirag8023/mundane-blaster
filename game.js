@@ -12,6 +12,10 @@ var config = {
     }
 }
 
+var gameSettings = {
+    moveSpeed: 2,
+}
+
 window.onload = function() {
     var game = new Phaser.Game(config);
 }
