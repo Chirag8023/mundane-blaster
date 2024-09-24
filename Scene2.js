@@ -9,6 +9,7 @@ class Scene2 extends Phaser.Scene {
 
         this.cursorKeys = this.input.keyboard.createCursorKeys();
         this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.projectiles = this.add.group();
 
         this.ship1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "ship");
         this.ship2 = this.add.sprite(config.width / 2, config.height / 2, "ship2");
@@ -32,8 +33,8 @@ class Scene2 extends Phaser.Scene {
 
         this.powerUps = this.physics.add.group();
 
-        var maxObjects = 4;
-        for (var i = 0; i <= maxObjects; i++) {
+        var maxObjects = 3;
+        for (var i = 0; i < maxObjects; i++) {
             var powerUp = this.physics.add.sprite(16, 16, "power-up");
             this.powerUps.add(powerUp);
             powerUp.setRandomPosition(0, 0, config.width, config.height);
@@ -44,7 +45,7 @@ class Scene2 extends Phaser.Scene {
                 powerUp.play("gray");
             }
 
-            powerUp.setVelocity(100, 100);
+            powerUp.setVelocity(50, 50);
             powerUp.setCollideWorldBounds(true);
             powerUp.setBounce(1);
         }
@@ -52,15 +53,19 @@ class Scene2 extends Phaser.Scene {
 
     update() {
         this.moveShip(this.ship1, 1);
-        this.moveShip(this.ship2, 2);
-        this.moveShip(this.ship3, 3);
+        this.moveShip(this.ship2, 1.5);
+        this.moveShip(this.ship3, 2);
 
         this.background.tilePositionY -= 0.5;
 
         this.movePlayerManager();
 
         if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-            console.log("Fire!");
+            this.shootBeam();
+        }
+        for (var i = 0; i < this.projectiles.getChildren().length; i++) {
+            var beam = this.projectiles.getChildren()[i];
+            beam.update();
         }
     }
 
@@ -96,6 +101,10 @@ class Scene2 extends Phaser.Scene {
         else if (this.cursorKeys.down.isDown) {
             this.player.y += gameSettings.moveSpeed;
         }
+    }
+
+    shootBeam() {
+        var beam = new Beam(this);        
     }
 
 }
