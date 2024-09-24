@@ -44,9 +44,6 @@ class Scene1 extends Phaser.Scene {
     }
     
     create() {
-        this.add.text(20, 20, "Loading game...");
-        this.scene.start("playGame");
-
         this.anims.create({
             key: "ship1_anim",
             frames: this.anims.generateFrameNumbers("ship"),
@@ -103,5 +100,30 @@ class Scene1 extends Phaser.Scene {
             repeat: -1
         });
 
+        this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.add.bitmapText(55, 30,"pixelFont","Mundane Blaster",26);
+        this.add.bitmapText(57, 240,"pixelFont","Press SPACE to start", 20);
+        this.pickupSound = this.sound.add("audio_pickup");
+        this.music = this.sound.add("music");
+        var musicConfig = {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+        this.music.play(musicConfig);
+        this.player = this.physics.add.sprite(config.width / 2, config.height - 64, "player");
+
+        this.player.play("thrust");
+    }
+
+    update() {
+        if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+            this.scene.start("playGame");
+            this.pickupSound.play();
+        }
     }
 }

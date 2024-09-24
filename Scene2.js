@@ -16,7 +16,7 @@ class Scene2 extends Phaser.Scene {
         this.ship1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "ship");
         this.ship2 = this.add.sprite(config.width / 2, config.height / 2, "ship2");
         this.ship3 = this.add.sprite(config.width / 2 + 50, config.height / 2, "ship3");
-        this.player = this.physics.add.sprite(config.width / 2 - 8, config.height - 64, "player");
+        this.player = this.physics.add.sprite(config.width / 2, config.height - 64, "player");
 
         this.player.setCollideWorldBounds(true);
 
@@ -159,6 +159,9 @@ class Scene2 extends Phaser.Scene {
     pickPowerUp(player, powerUp) {
         powerUp.disableBody(true, true);
         this.pickupSound.play();
+        this.score += 100;
+        var scoreFormated = this.zeroPad(this.score, 6);
+        this.scoreLabel.text = "SCORE " + scoreFormated;
     }
 
     hurtPlayer(player, enemy) {
