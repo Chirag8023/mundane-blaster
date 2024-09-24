@@ -102,6 +102,7 @@ class Scene1 extends Phaser.Scene {
 
         this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.add.bitmapText(55, 30,"pixelFont","Mundane Blaster",26);
+        this.add.bitmapText(55, 50,"pixelFont","Stuck Forever!",16);
         this.add.bitmapText(59, 240,"pixelFont","Press SPACE to start", 20);
         this.pickupSound = this.sound.add("audio_pickup");
         this.music = this.sound.add("music");
