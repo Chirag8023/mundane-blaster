@@ -8,6 +8,6 @@ body {
 }
 
 canvas {
-    border: 11px solid #f3f0e0;
+    border: 3px solid #000;
     scale: 2;
 }
