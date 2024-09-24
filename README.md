@@ -5,6 +5,8 @@
 ## Demo
 
 You can play **Mundane Blaster** online: [Mundane Blaster Game](https://chirag8023.github.io/mundane-blaster/).
+| ![Ss1](ss1.png)  | ![Ss2](ss2.png)  |
+| ----------- | ----------- |
 
 ## How to Play
 
